@@ -16,7 +16,7 @@ export default function SignInPage() {
             </div>
           </form>
           <div className="card-actions">
-            <button className="btn btn-primary">Buy Now</button>
+            <button className="btn btn-primary">Sign In</button>
           </div>
         </div>
       </div>
