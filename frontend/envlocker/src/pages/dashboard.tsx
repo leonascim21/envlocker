@@ -1,6 +1,18 @@
+import { useForm } from "@tanstack/react-form";
 import Navbar from "../components/navbar";
 
 export default function DashboardPage() {
+  const form = useForm({
+    defaultValues: {
+      name: "",
+      key: "",
+      note: "",
+    },
+    onSubmit: async ({ value }) => {
+      console.log(value);
+    },
+  });
+
   return (
     <div className="flex flex-col items-center">
       <Navbar />
@@ -20,11 +32,72 @@ export default function DashboardPage() {
         </div>
 
         <div className="flex flex-col overflow-x-auto border-1 border-neutral-500 rounded-xl col-span-5">
-          <form className="flex flex-row gap-3 p-2 items-center">
-            <input type="text" className="input" placeholder="Name" />
-            <input type="text" className="input" placeholder="Key" />
-            <input type="text" className="input" placeholder="Note" />
-            <button className="btn btn-primary">Add Key</button>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              form.handleSubmit();
+            }}
+          >
+            <div className="flex flex-row gap-3 p-2 items-center">
+              <form.Field
+                name="name"
+                children={(field) => (
+                  <input
+                    id={field.name}
+                    name={field.name}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                    type="text"
+                    className="input"
+                    placeholder="Name"
+                  />
+                )}
+              />
+              <form.Field
+                name="key"
+                children={(field) => (
+                  <input
+                    id={field.name}
+                    name={field.name}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                    type="text"
+                    className="input"
+                    placeholder="Key"
+                  />
+                )}
+              />
+              <form.Field
+                name="note"
+                children={(field) => (
+                  <input
+                    id={field.name}
+                    name={field.name}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                    type="text"
+                    className="input"
+                    placeholder="Note"
+                  />
+                )}
+              />
+              <form.Subscribe
+                selector={(state) => [state.canSubmit, state.isSubmitting]}
+                children={([canSubmit, isSubmitting]) => (
+                  <button
+                    type="submit"
+                    disabled={!canSubmit}
+                    className="btn btn-primary"
+                  >
+                    {isSubmitting ? "..." : "Add Key"}
+                  </button>
+                )}
+              />
+            </div>
           </form>
           <table className="table table-zebra">
             <thead>
