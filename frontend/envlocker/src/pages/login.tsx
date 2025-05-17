@@ -1,4 +1,5 @@
 import { useForm } from "@tanstack/react-form";
+import { NavLink } from "react-router";
 
 export default function SignInPage() {
   const form = useForm({
@@ -79,6 +80,11 @@ export default function SignInPage() {
                   </div>
                 )}
               />
+              <NavLink to="/signup">
+                <p className="text-sm text-primary underline">
+                  Create an Account
+                </p>
+              </NavLink>
             </div>
           </form>
         </div>
