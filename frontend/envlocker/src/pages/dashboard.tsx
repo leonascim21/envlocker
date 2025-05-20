@@ -1,5 +1,6 @@
 import { useForm } from "@tanstack/react-form";
 import Navbar from "../components/navbar";
+import CreateProjectModal from "../components/createProjectModal";
 
 export default function DashboardPage() {
   const form = useForm({
@@ -16,9 +17,10 @@ export default function DashboardPage() {
   return (
     <div className="flex flex-col items-center">
       <Navbar />
-      <div className="grid grid-cols-6 w-[90%] gap-10 mt-8">
-        <div className="flex col-span-1 ">
+      <div className="grid grid-cols-6 w-[90%] gap-32 mt-8">
+        <div className="flex flex-col col-span-1 ">
           <ul className="menu bg-base-200 rounded-box w-56">
+            <CreateProjectModal />
             <li>
               <a>Project 1</a>
             </li>
